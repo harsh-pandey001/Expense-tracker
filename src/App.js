@@ -1,17 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-import {Typography, styled} from '@mui/material';
-import { margin } from '@mui/system';
+import { Typography, styled, Box } from "@mui/material";
+import Balance from "./components/Balance";
+import ExpenseCard from "./components/ExpenseCard";
+import NewTrans from "./components/NewTrans";
 
-const Header = styled(Typography) `
-  margin: 10px 0;`
+
+const Header = styled(Typography)`
+  margin: 10px 0;
+  font-size: 36px;
+  color: blue;
+  text-transform: Capitalized;
+`;
 
 function App() {
   return (
-    <div className="App">
-     <Header> Expense Tracker</Header>
-    </div>
+    <Box className="App">
+      <Header> Expense Tracker</Header>
+      <Box>
+        <Box>
+          <Balance/>
+          <ExpenseCard/>
+          <NewTrans/>
+        </Box>
+        <Box>
+
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
