@@ -10,7 +10,7 @@ display:flex;
 
 `
 
-const ExpenseCard = () => {
+const ExpenseCard = ({}) => {
   return (
     <Container>
         <Card>
