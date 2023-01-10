@@ -1,8 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 
-import { Component, useState } from "react";
-
+import { useState } from "react";
 import { Typography, styled, Box } from "@mui/material";
 import Balance from "./components/Balance";
 import ExpenseCard from "./components/ExpenseCard";
@@ -11,53 +9,61 @@ import Transaction from "./components/Transaction";
 
 const Header = styled(Typography)`
   margin: 10px 0;
-  font-size: 36px;
   color: blue;
-  text-transform: Capitalized;
+  font-size: 36px;
+  text-transform: uppercase;
 `;
 
-const Components = styled(Box)`
-display: flex;
-
-`
+const Component = styled(Box)`
+  background: #FFF;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  width: 800px;
+  & > div {
+    padding: 10px;
+    width: 50%;
+    height: 70vh;
+  }
+}
+`;
 
 function App() {
-  const [transaction,setTransaction] = useState([
- {
-  id: 1,
-  text:'Samosa',
-  amount: -15
- },
- {
-  id: 2,
-  text:'Salary',
-  amount: 400000
- },
- {
-  id: 3,
-  text:'bike',
-  amount: -9
- },
- {
-  id: 4,
-  text:'bonus',
-  amount: 100000
- },
-  ])
+  
+  const [transactions, setTransactions] = useState([
+    { id: 1, text: 'Momos', amount: -20},
+    { id: 2, text: 'Salary', amount: 3000},
+    { id: 3, text: 'Book', amount: -100},
+    { id: 4, text: 'Bonus', amount: 1500 },
+  ]);
+
+  const deleteTransaction = (id) => {
+    console.log(id);
+    setTransactions(transactions.filter(transaction => transaction.id !== id));
+    console.log(transactions);
+  }
+
+  const addTransaction = (transaction) => {
+    setTransactions(transactions => [transaction, ...transactions]);
+    console.log(transaction);
+    console.log(transactions);
+  }
+
+
   return (
-    <Box className="App">
-      <Header> Expense Tracker</Header>
-      <Components>
+    <div className="App">
+      <Header>Expense Tracker</Header>
+      <Component>
         <Box>
-          <Balance />
-          <ExpenseCard />
-          <NewTrans />
+          <Balance transactions={transactions} />
+          <ExpenseCard transactions={transactions} />
+          <NewTrans addTransaction={addTransaction}/>
         </Box>
         <Box>
-          <Transaction transaction = {transaction}/>
+          <Transaction transactions={transactions} deleteTransaction={deleteTransaction}/>
         </Box>
-      </Components>
-    </Box>
+      </Component>
+    </div>
   );
 }
 
